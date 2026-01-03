@@ -115,7 +115,7 @@ std::istream& operator>>(std::istream& is, Game& game) {
 }
 
 void parse_input(std::vector<Game>& games) {
-    std::ifstream ifs{"input_test.txt"};
+    std::ifstream ifs{"input.txt"};
     if (!ifs.is_open()) {
         std::cerr << "Unable to open file";
         return;
@@ -144,7 +144,19 @@ unsigned long part_1() {
     return sum_valid_ids;
 }
 
+unsigned long part_2() {
+    std::vector<Game> games;
+    parse_input(games);
+
+    unsigned long sum_power_games = 0;
+    for (const auto& game: games) {
+        sum_power_games += game.m_max_red_cube * game.m_max_green_cube * game.m_max_blue_cube;
+    }
+    return sum_power_games;
+}
+
 int main() {
     std::cout << part_1() << std::endl;
+    std::cout << part_2() << std::endl;
     return 0;
 }
